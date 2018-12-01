@@ -1,0 +1,182 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "smart notifications",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GeneralNotifications",
+                    "slots": [],
+                    "samples": [
+                        "do i have something to care about",
+                        "what are my notifications",
+                        "what have i missed",
+                        "have i missed something",
+                        "have I missed something important"
+                    ]
+                },
+                {
+                    "name": "FetchNotifications",
+                    "slots": [
+                        {
+                            "name": "applicationName",
+                            "type": "AMAZON.Actor",
+                            "samples": [
+                                "{applicationName}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "Whats going on with applications",
+                        "whats up with {applicationName}",
+                        "can you fetch notifications for {applicationName}"
+                    ]
+                },
+                {
+                    "name": "PushNotifications",
+                    "slots": [
+                        {
+                            "name": "getter",
+                            "type": "AMAZON.Person",
+                            "samples": [
+                                "{getter}"
+                            ]
+                        },
+                        {
+                            "name": "matter",
+                            "type": "AMAZON.Organization",
+                            "samples": [
+                                "{matter}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "can you send a mail for me about {matter} to {getter}",
+                        "Can you send a notification for me about {matter} to {getter}"
+                    ]
+                }
+            ],
+            "types": []
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "FetchNotifications",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "applicationName",
+                            "type": "AMAZON.Actor",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.649817661393.254840838270"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "PushNotifications",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "getter",
+                            "type": "AMAZON.Person",
+                            "confirmationRequired": true,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "confirmation": "Confirm.Slot.1325707338919.1027115704720",
+                                "elicitation": "Elicit.Slot.150558972156.1229832258641"
+                            }
+                        },
+                        {
+                            "name": "matter",
+                            "type": "AMAZON.Organization",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.150558972156.1271969911252"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.649817661393.254840838270",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which application do you want to know about"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.150558972156.1271969911252",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What would you like to include in the mail"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "About what do you want me to describe"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.150558972156.1229832258641",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "who should be receiving it"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "whom should i send it to"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.1503594437289.707917153461",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Sure you want to know about {applicationName}"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.1325707338919.1027115704720",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Do you really want to send it to {getter}"
+                    }
+                ]
+            }
+        ]
+    }
+}

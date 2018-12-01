@@ -1,0 +1,24 @@
+Documentation for the alexa interaction for team DIGIVATORS at the fiction2science event at Mainz
+-----------------------------------------------------
+INVOKING
+alexa, open smart notifications
+
+Intent : GeneralNotifications - Fetch notifications in general.
+Possible Utterances:
+1. do i have something to care about
+2. what have i missed
+3. what are my notifications
+4. have i missed something
+5. have I missed something important
+
+Intent : FetchNotifications - Fetch notifications specifically for the 
+Possible Utterances:
+1. Whats up with {appname}
+2. whats going on with applications
+4. can you fetch notifications for {applicationName}
+
+Intent : PushNotifications - Send a mail to the "getter" about the "matter"
+Possible Utterances:
+1. can you send a notification for me about {matter} to {getter}
+2. can you send a mail for me about {matter} to {getter}
+

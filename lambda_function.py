@@ -1,7 +1,6 @@
 import json
 
 def lambda_handler(event, context):
-    # TODO implement
     #First check the request type.
     reqType = event['request']['type']
     
@@ -11,7 +10,7 @@ def lambda_handler(event, context):
        "response": {
         "outputSpeech": {
           "type": "PlainText",
-          "text": "What can I help you with!"
+          "text": "Hi Peter, What can I help you with!"
         },
         "card": {
           "content": "Im here to make things easy for you",
@@ -57,11 +56,13 @@ def lambda_handler(event, context):
           "sessionAttributes": {}
         }
         elif (intent == "FetchNotifications"):
+        #TODO : Develop actual interactions to the applications with possible interfaces
+        #Check application name and decide accordingly
           try:
             applicationsName = event['request']['intent']['slots']['applicationName']['value']
           except KeyError:
             applicationsName = ""
-          if(applicationsName == "service"):
+          if(applicationsName == "database"):
             return {
             "version": "1.0",
             "response": {
@@ -70,8 +71,8 @@ def lambda_handler(event, context):
                 "text": "There is no notification from application " + applicationsName
               },
               "card": {
-                "content": "Low priority notification for XYZ",
-                "title": "Low Priority notification",
+                "content": "no notification for "+applicationsName,
+                "title": "no notification",
                 "type": "Simple"
               },
               "reprompt": {
@@ -84,7 +85,7 @@ def lambda_handler(event, context):
             },
             "sessionAttributes": {}
           }
-          elif(applicationsName == "Microsoft"):
+          elif(applicationsName == "Microsoft"):#Stub application
             return {
             "version": "1.0",
             "response": {
@@ -107,6 +108,7 @@ def lambda_handler(event, context):
             },
             "sessionAttributes": {}
           }
+          #This is to deal with utterance without the app name, in the case it will work like GeneralNotifications intent
           elif(applicationsName == ""):
           #appName = ['slots']['applicationName']
             return {
@@ -114,10 +116,10 @@ def lambda_handler(event, context):
           "response": {
             "outputSpeech": {
               "type": "PlainText",
-              "text": "There is a low priority notification from application XYZ. Thats all"
+              "text": "There is a low priority notification from Sequel. Thats all"
             },
             "card": {
-              "content": "Low priority notification for XYZ",
+              "content": "Low priority notification for Sequel",
               "title": "Low Priority notification, nothing more",
               "type": "Simple"
             },
@@ -131,12 +133,14 @@ def lambda_handler(event, context):
           },
           "sessionAttributes": {}
         }
-        
+        #TODO : Implement pusing out emails to actual users/contacts with the help of email orchestration or a local mail service
         elif (intent == "PushNotifications"):
           matter = event['request']['intent']['slots']['matter']['value']
           getter = event['request']['intent']['slots']['getter']['value']
-          print(matter)
-          print(getter)
+          #Debug
+           #print(matter)
+           #print(getter)
+          #EndDebug
           return {
           "version": "1.0",
           "response": {
@@ -159,28 +163,27 @@ def lambda_handler(event, context):
           },
           "sessionAttributes": {}
         }
-        
+        #This is something sent for 
         else:
           return {
           "version": "1.0",
           "response": {
             "outputSpeech": {
               "type": "PlainText",
-              "text": "This is a generic response"
+              "text": "You havent programmed me to do that yet Peter. I guess I will leave"
             },
             "card": {
-              "content": "Generic response",
-              "title": "Generic response",
+              "content": "Not yet programmed",
+              "title": "Unknown action",
               "type": "Simple"
             },
             "reprompt": {
               "outputSpeech": {
                 "type": "PlainText",
-                "text": "Do you want me to check up anything else"
+                "text": "Do you want me to do anything else"
               }
             },
-            "shouldEndSession": False
+            "shouldEndSession": True
           },
           "sessionAttributes": {}
         }
-
